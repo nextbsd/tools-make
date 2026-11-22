@@ -8987,7 +8987,11 @@ fi
 
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether objc has thread support" >&5
 printf %s "checking whether objc has thread support... " >&6; }
-if test "$OBJC_THREAD" != ""; then
+# A cross build can't run the test programs below: let a site file or
+# the environment give the answer in gs_cv_objc_threaded.
+if test "${gs_cv_objc_threaded+set}" = set; then
+  objc_threaded="$gs_cv_objc_threaded"
+elif test "$OBJC_THREAD" != ""; then
   LIBS="$OBJCRT $LIBS $OBJC_THREAD"
   if test "$cross_compiling" = yes
 then :
