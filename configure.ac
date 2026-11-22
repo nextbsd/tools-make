@@ -1207,7 +1207,11 @@ fi
 
 
 AC_MSG_CHECKING(whether objc has thread support)
-if test "$OBJC_THREAD" != ""; then
+# A cross build can't run the test programs below: let a site file or
+# the environment give the answer in gs_cv_objc_threaded.
+if test "${gs_cv_objc_threaded+set}" = set; then
+  objc_threaded="$gs_cv_objc_threaded"
+elif test "$OBJC_THREAD" != ""; then
   LIBS="$OBJCRT $LIBS $OBJC_THREAD"
   AC_RUN_IFELSE([AC_LANG_SOURCE([[#include "config_thread.m"]])],[objc_threaded="$OBJC_THREAD"],[objc_threaded=""],[objc_threaded=""])
 elif test "$host_os" = linux-gnu; then
